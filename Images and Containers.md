@@ -16,6 +16,7 @@ The running unit of software
 # HOW TO BUILD A DOCKERFILE
 
 ### FROM
+`FROM {imageName}:{tag}`
 install base image
 
 ### WORKDIR
@@ -35,7 +36,7 @@ Exposes the api's PORT to be used outside the container
 
 ### CMD
 - runs when container has started
-- syntax - ["{CMD1}", "{CMD2}"], eg. ["go", "run", "main.go"]
+- syntax - `["{CMD1}", "{CMD2}"]`, eg. `["go", "run", "main.go"]`
 
 ---
 
@@ -46,6 +47,8 @@ cli command to build the image from your Dockerfile
  - runs in your current directory
  - caches build
  - images will have to be rebuilt when changes to the source code are made
+flags
+- `-t` adds name:tag to image
 
 ### Docker run
 `docker run -p {externalPortNo.:internalPortNo.} {image ID/image Name}`
@@ -55,6 +58,7 @@ starts up a container of the specified image given
  - `-i` flag to run interactive container
  - `-t` flag to run with terminal
  - `--rm` flag to remove container on stop
+ - `--name` flag to name container
 
 ### DOCKER STOP
 `docker stop {container name}`
@@ -63,16 +67,35 @@ stops the specified docker container
 ---
 
 # HOW TO COPY FILES INTO / FROM A CONTAINER
-`docker cp {arg1} {arg2}`
+`docker cp {arg1} {arg2}` 
 - command to copy files to and from a container
 	- arg1 - path of the source directory
-	- arg2 - path of the destination
+	- arg2 - containerName:path of the destination
+
+---
+
+# HOW TO PUSH/PULL IMAGES TO DOCKER HUB/PRIVATE REGISTRY
+
+1. Create an account on docker.com and sign in on docker desktop
+2. Create new repo on hub.docker.com
+
+### PUSH IMAGE
+`docker push {username}/{reponame}:{Image_name}`
+- pushes specified image to docker hub
+`docker push {Host}:{Image_name}`
+- pushes specified image to private registry. `{Host}` is the name of registry
+
+### PULL IMAGE
+`docker pull {username}/{reponame}:{Image_name}`
+- pulls specified image from docker hub
+`docker pull {Host}:{Image_name}`
+- pulls specified image from private registry. `{Host}` is the name of registry
 
 ---
 
 # NOTES
 - images will have to be rebuilt when changes to the source code are made
-- use --help to check commands
+- use `--help` to check commands
 
 ---
 
@@ -124,7 +147,7 @@ command to list containers
 `docker cp {arg1} {arg2}` 
 - command to copy files to and from a container
 	- arg1 - path of the source directory
-	- arg2 - path of the destination
+	- arg2 - containerName:path of the destination
 
 
 
