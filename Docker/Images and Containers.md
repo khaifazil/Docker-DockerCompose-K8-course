@@ -34,6 +34,10 @@ runs when image is being built
 ### EXPOSE
 Exposes the api's PORT to be used outside the container
 
+### VOLUME
+`VOLUME ["{path/in/container}"]`
+- adds an anonymous volume to your container
+
 ### CMD
 - runs when container has started
 - syntax - `["{CMD1}", "{CMD2}"]`, eg. `["go", "run", "main.go"]`
@@ -59,6 +63,7 @@ starts up a container of the specified image given
  - `-t` flag to run with terminal
  - `--rm` flag to remove container on stop
  - `--name` flag to name container
+ - `-v {localName}:{path/in/container}` flag to add named volume to container
 
 ### DOCKER STOP
 `docker stop {container name}`
@@ -78,6 +83,7 @@ stops the specified docker container
 
 1. Create an account on docker.com and sign in on docker desktop
 2. Create new repo on hub.docker.com
+3. Use command `docker tag`  to rename image into this format {userName}/{reponame}
 
 ### PUSH IMAGE
 `docker push {username}/{reponame}:{Image_name}`
@@ -100,55 +106,54 @@ stops the specified docker container
 ---
 
 # DOCKER COMMANDS
-### ATTACH
-`docker attach {containerid/name}`
-- attaches to a running detached container
 
-### LOGS
-`docker logs {containerID/name}`
-- shows the logs for a running container
+- `docker attach {containerid/name}`
+	- attaches to a running detached container
 
-### RM
-`docker rm {containerID/Name}`
-- removes containers
+- `docker logs {containerID/name}`
+	- shows the logs for a running container
 
-### IMAGES
-`docker images`
-- list images
+- `docker rm {containerID/Name}`
+	- removes containers
 
-### RMI
-`docker rmi {imageID/Name}`
-- removes images
-- can only remove when not used by a container
-	- remove child containers first!
+- `docker images`
+ - list images
 
-### PRUNE
-`docker image prune`
-- remove unused/dangling images
-`docker container prune`
-- remove stopped containers
+- `docker rmi {imageID/Name}`
+	- removes images
+	- can only remove when not used by a container
+		- remove child containers first!
 
-### DOCKER STOP
-`docker stop {container name}`
-stops the specified docker container
+- `docker image prune`
+	- remove unused/dangling images
 
-### DOCKER PS
-`docker ps`
-command to list containers
+- `docker container prune`
+	- remove stopped containers
 
-### INSPECT
-`docker image inspect {imageID/Name}`
-- Display detailed information on one or more images
-`docker container inspect {containerID/Name}`
-- Display detailed information on one or more containers
+- `docker stop {container name}`
+	- stops the specified docker container
 
-### CP - COPY
-[[#HOW TO COPY FILES INTO FROM A CONTAINER]]
-`docker cp {arg1} {arg2}` 
-- command to copy files to and from a container
-	- arg1 - path of the source directory
-	- arg2 - containerName:path of the destination
+- `docker ps`
+	- command to list containers
+
+- `docker image inspect {imageID/Name}`
+	- Display detailed information on one or more images
+
+- `docker container inspect {containerID/Name}`
+	- Display detailed information on one or more containers
 
 
+- `docker cp {arg1} {arg2}`
+	- command to copy files to and from a container
+		- arg1 - path of the source directory
+		- arg2 - containerName:path of the destination
+	- [[#HOW TO COPY FILES INTO FROM A CONTAINER]]
 
+- `docker tag {original image name}:{tag} {new image name}:{tag}`
+	- creates a copy of the original image with the new image name
+	- tags are optional
+		- if no tags given it will use the latest version
+
+- `docker volumes {command}`
+	- command to interact with container volumes
 ---
