@@ -32,6 +32,7 @@
 
 # BIND MOUNTS
 - `-v {absolute/path/to/local/code}:/{workingDir/in/container}`
+- add `:ro` to end of flag to ensure read only
 - `-v $(pwd):/{workingDir/in/container}` short cut to path - mac
 - `-v "%cd%":/{workingDir/in/container}` shortcut to path - windows
 - User defines a folder / path on host machine
