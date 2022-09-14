@@ -52,8 +52,14 @@ Exposes the api's PORT to be used outside the container
 
 ### CMD
 `CMD ["{CMD1}", "{CMD2}"]`
-- runs when container has started
+- command that runs when container has started
+- commands given on docker run will overwrite CMD commands
 - syntax - `["{CMD1}", "{CMD2}"]`, eg. `["go", "run", "main.go"]`
+
+### ENTRYPOINT
+`ENTRYTPOINT ["CMD1", ... ]`
+- Commands given on docker run will be appended to the end of entrypoint cmds
+
 
 ---
 
