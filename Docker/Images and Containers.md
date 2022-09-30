@@ -18,15 +18,18 @@ The running unit of software
 ### FROM
 `FROM {imageName}:{tag}`
 install base image
+- use `AS {buildName}` when building multistage docker containers
 
 ### WORKDIR
 `WOKRDIR {/path}`
 Sets root directory for image
 
 ### COPY
-`COPY {arg1} {arg2}`
+`COPY {flag} {arg1} {arg2}`
 arg 1 - copy from source directory (Dockerfile's original directory)
 arg 2 - copy to destination in the image (Working Directory set usually /app)
+- `--from={buildStage}`
+	- flag to specify which stage to copy from
 
 ### RUN
 `RUN {Commands}`
@@ -72,6 +75,8 @@ cli command to build the image from your Dockerfile
  - images will have to be rebuilt when changes to the source code are made
 flags
 - `-t` adds name:tag to image
+- `-f` flag to build non default named Dockerfile
+- `--target` flag to target build stage
 
 ### DOCKER RUN
 `docker run {flags} {image ID/image Name}`
